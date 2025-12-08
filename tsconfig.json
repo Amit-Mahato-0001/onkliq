@@ -20,6 +20,7 @@
       "@/*": ["./src/*"],
       "~/*": ["./src/components/*"],
       "~~popup/*": ["./src/components/modules/popup/*"],
+      "_scripts/*": ["./src/contentScript/*"],
       "$/*": ["./src/assets/*"]
     }
   },

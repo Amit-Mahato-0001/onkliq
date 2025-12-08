@@ -11,7 +11,7 @@ export default {
     },
     colors: {
       background: '#000000ff',
-      unit: '#161616',
+      unit: '#FE4101',
       control: '#1E1E1E',
       white: '#FFFFFF',
       gray: '#9A9A9A',

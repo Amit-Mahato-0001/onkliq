@@ -33,6 +33,7 @@ export default defineConfig(({mode}) => {
         '@': resolve(__dirname, './src'),
         '~': resolve(__dirname, './src/components'),
         '~~popup': resolve(__dirname, './src/components/modules/popup'),
+        _scripts: resolve(__dirname, './src/contentScript/'),
         $: resolve(__dirname, './src/assets/'),
       },
     },
