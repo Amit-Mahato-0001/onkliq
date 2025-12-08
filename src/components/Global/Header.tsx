@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import logo from '@/assets/logo.png'
+import Button from '~/UI/Button'
 
 export default function Header() {
   return (
@@ -20,8 +21,10 @@ export default function Header() {
         <span className="text-white text-lg font-semibold tracking-wide">
           ONKLIQ
         </span>
-      </div>
 
+        <Button variant="secondary">Button</Button>
+      </div>
+      
     </div>
   )
 }
