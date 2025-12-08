@@ -19,6 +19,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "~/*": ["./src/components/*"],
+      "~~popup/*": ["./src/components/modules/popup/*"],
       "$/*": ["./src/assets/*"]
     }
   },
