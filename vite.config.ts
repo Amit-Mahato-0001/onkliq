@@ -34,6 +34,7 @@ export default defineConfig(({mode}) => {
         '~': resolve(__dirname, './src/components'),
         '~~popup': resolve(__dirname, './src/components/modules/popup'),
         _scripts: resolve(__dirname, './src/contentScript/'),
+        _bg: resolve(__dirname, './src/background/'),
         $: resolve(__dirname, './src/assets/'),
       },
     },

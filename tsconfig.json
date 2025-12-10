@@ -21,6 +21,7 @@
       "~/*": ["./src/components/*"],
       "~~popup/*": ["./src/components/modules/popup/*"],
       "_scripts/*": ["./src/contentScript/*"],
+      "_bg/*": ["./src/background/*"],
       "$/*": ["./src/assets/*"]
     }
   },
