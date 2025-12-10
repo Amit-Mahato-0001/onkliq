@@ -10,13 +10,13 @@ export default {
       normal: '400',
     },
     colors: {
-      background: '#000000ff',
-      unit: '#FE4101',
-      control: '#1E1E1E',
-      white: '#FFFFFF',
-      gray: '#9A9A9A',
-      transparent: 'transparent',
-    },
+      background: '#0B0B0C',
+      unit: '#343434',
+      control: '#1D1D1D',
+      white: '#FAFAFA',
+      gray: '#909095',
+      transparent: 'transparent'
+    }
   },
   plugins: [],
 } satisfies Config
