@@ -8,7 +8,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export const unitStyles = 'p-1.5 bg-transparent border border-unit'
+export const unitStyles = 'p-1.5 bg-unit rounded-lg'
 
 export default function Unit({token, className, children}: Props) {
   return (
