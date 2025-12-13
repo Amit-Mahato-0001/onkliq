@@ -1,16 +1,19 @@
 import {type FontData, fontsExtractor} from '_scripts/fontsExtractor'
 import {type ColorData, colorsExtractor} from '_scripts/colorsExtractor'
+import { type ImageData, imagesExtractor } from '_scripts/imagesExtractor'
 
 export type Units = {
-  fonts: FontData[]
+  images: ImageData[]
   colors: ColorData[]
+  fonts: FontData[]
 }
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'EXTRACT_UNITS') {
     sendResponse({
-      fonts: fontsExtractor(),
+      images: imagesExtractor(),
       colors: colorsExtractor(),
+      fonts: fontsExtractor(),
     } as Units)
   }
 })
