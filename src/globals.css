@@ -4,3 +4,11 @@
 body {
   @apply min-w-[28rem] bg-background text-white;
 }
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

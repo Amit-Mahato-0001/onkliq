@@ -1,6 +1,9 @@
 import type { ImageData } from '_scripts/imagesExtractor'
-import { X } from 'lucide-react'
+import { X, Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
+
+type Tab = 'images' | 'icons' | 'svgs'
 
 export function AllImagesView({
   data,
@@ -9,61 +12,85 @@ export function AllImagesView({
   data: ImageData[]
   onClose: () => void
 }) {
+  const [activeTab, setActiveTab] = useState<Tab>('images')
+
   const images = data.filter(d => d.type === 'img' || d.type === 'bg-image')
   const icons = data.filter(d => d.type === 'icon' && !d.src.endsWith('.svg'))
   const svgs = data.filter(d => d.src.endsWith('.svg'))
 
+  const map: Record<Tab, ImageData[]> = {
+    images,
+    icons,
+    svgs,
+  }
+
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm">
-      <div className="absolute inset-4 bg-background rounded-xl p-4 overflow-y-auto">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">All Assets</h2>
-          <button onClick={onClose}>
-            <X className="size-5" />
-          </button>
+    <div className="fixed inset-0 bg-background z-50 flex flex-col">
+
+      {/* Header */}
+      <div className="flex items-center justify-between px-4 py-3 border-b border-control">
+        <div className="flex gap-1 text-sm">
+          {(['images', 'icons', 'svgs'] as Tab[]).map(tab => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={cn(
+                'px-3 py-1.5 rounded-md capitalize',
+                activeTab === tab
+                  ? 'bg-control text-white'
+                  : 'text-gray hover:bg-control/50'
+              )}
+            >
+              {tab}
+            </button>
+          ))}
         </div>
 
-        <Section title="Images" items={images} />
-        <Section title="Icons" items={icons} />
-        <Section title="SVGs" items={svgs} />
+        <button
+          onClick={onClose}
+          className="p-2 rounded-md hover:bg-control"
+        >
+          <X className="size-4" />
+        </button>
       </div>
-    </div>
-  )
-}
 
-function Section({
-  title,
-  items,
-}: {
-  title: string
-  items: ImageData[]
-}) {
-  if (items.length === 0) return null
+      {/* Content */}
+      <div
+        className={cn(
+          'flex-1 overflow-y-auto p-3',
+          'scrollbar-none'
+        )}
+      >
+        {map[activeTab].length === 0 ? (
+          <div className="h-full grid place-items-center text-gray text-sm">
+            No {activeTab} detected
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-2">
+            {map[activeTab].map(({ src }, i) => (
+              <div
+                key={src + i}
+                className="relative aspect-square rounded-lg overflow-hidden group bg-control"
+              >
+                <img
+                  src={src}
+                  className="size-full object-cover group-hover:scale-105 duration-300"
+                />
 
-  return (
-    <div className="mb-6">
-      <h3 className="mb-2 text-sm font-medium text-gray">
-        {title} ({items.length})
-      </h3>
-
-      <div className="grid grid-cols-4 gap-2">
-        {items.map(({ src }) => (
-          <a
-            key={src}
-            href={src}
-            target="_blank"
-            className={cn(
-              'h-20 rounded-lg overflow-hidden bg-control',
-              'grid place-items-center group'
-            )}
-          >
-            <img
-              src={src}
-              className="object-cover size-full group-hover:scale-105 duration-300"
-            />
-          </a>
-        ))}
+                {/* Hover actions */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 duration-200 flex items-center justify-center">
+                  <a
+                    href={src}
+                    download
+                    className="p-2 bg-control rounded-md hover:bg-control/70"
+                  >
+                    <Download className="size-4" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
